@@ -1,4 +1,4 @@
-import { Prisma, PrismaClient, Task } from '@prisma/client';
+import { Prisma, PrismaClient, Task, TypeTask } from '@prisma/client';
 
 export class TaskService {
 	private prisma;
@@ -44,7 +44,30 @@ export class TaskService {
 	};
 
 	getAllTasks = async (): Promise<Task[]> => {
-		return this.prisma.task.findMany({});
+		return await this.prisma.task.findMany({});
+	};
+
+	searchTaskByQuery = async (
+		name: string | undefined,
+		type: TypeTask
+	): Promise<Task[]> => {
+		return await this.prisma.task.findMany({
+			where: {
+				OR: [
+					{
+						name: {
+							contains: name,
+						},
+					},
+					{
+						type,
+					},
+				],
+			},
+			orderBy: {
+				createdAt: 'desc',
+			},
+		});
 	};
 
 	getTaskById = async (id: string): Promise<Task | null> => {

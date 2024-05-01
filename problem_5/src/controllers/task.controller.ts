@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { TaskService } from '../services/task.service';
-import { Prisma, Task } from '@prisma/client';
+import { Prisma, Task, TypeTask } from '@prisma/client';
 import { Result, ValidationError, validationResult } from 'express-validator';
 
 export class TaskController {
@@ -78,6 +78,19 @@ export class TaskController {
 				return;
 			}
 			res.status(200).json(existedTask);
+		} catch (error) {
+			res.status(400).json(error);
+		}
+	};
+
+	searchTaskByQuery = async (req: Request, res: Response): Promise<void> => {
+		const { name, type } = req.query;
+		try {
+			const tasks: Task[] = await this.taskService.searchTaskByQuery(
+				name ? name.toString() : undefined,
+				TypeTask[type as keyof typeof TypeTask]
+			);
+			res.status(200).json(tasks);
 		} catch (error) {
 			res.status(400).json(error);
 		}

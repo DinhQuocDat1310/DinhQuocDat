@@ -11,6 +11,7 @@ const originPath: string = '/task';
 
 router.get(originPath + '/list', taskController.getAllTasks);
 router.get(originPath + '/detail/:id', taskController.getTaskDetails);
+router.get(originPath + '/search', taskController.searchTaskByQuery);
 router.post(originPath, validateCreateTask, taskController.createTask);
 router.put(originPath + '/:id', validateUpdateTask, taskController.updateTask);
 router.delete(originPath + '/:id', taskController.deleteTask);
