@@ -26,7 +26,7 @@ export class TaskController {
 		}
 	};
 
-	updateTask = async (req: Request, res: Response) => {
+	updateTask = async (req: Request, res: Response): Promise<void> => {
 		const errors: Result<ValidationError> = validationResult(req);
 		if (!errors.isEmpty()) {
 			res.status(400).json({ errors: errors.array() });
@@ -45,6 +45,23 @@ export class TaskController {
 			const task: Prisma.TaskUpdateInput =
 				await this.taskService.updateTask(id, data);
 			res.status(200).json(task);
+		} catch (error) {
+			res.status(400).json(error);
+		}
+	};
+
+	deleteTask = async (req: Request, res: Response): Promise<void> => {
+		const { id } = req.params;
+		try {
+			const existedTask: Task | null = await this.taskService.getTaskById(
+				id
+			);
+			if (!existedTask) {
+				res.status(400).json({ errors: 'Task ID not found' });
+				return;
+			}
+			const message: Object = await this.taskService.deleteTask(id);
+			res.status(200).json(message);
 		} catch (error) {
 			res.status(400).json(error);
 		}

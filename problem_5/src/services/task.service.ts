@@ -32,6 +32,17 @@ export class TaskService {
 		});
 	};
 
+	deleteTask = async (id: string): Promise<object> => {
+		const task: Task = await this.prisma.task.delete({
+			where: {
+				id,
+			},
+		});
+		return {
+			message: `Task ID: ${task.id} deleted`,
+		};
+	};
+
 	getAllTasks = async (): Promise<Task[]> => {
 		return this.prisma.task.findMany({});
 	};
