@@ -67,6 +67,22 @@ export class TaskController {
 		}
 	};
 
+	getTaskDetails = async (req: Request, res: Response): Promise<void> => {
+		const { id } = req.params;
+		try {
+			const existedTask: Task | null = await this.taskService.getTaskById(
+				id
+			);
+			if (!existedTask) {
+				res.status(400).json({ errors: 'Task ID not found' });
+				return;
+			}
+			res.status(200).json(existedTask);
+		} catch (error) {
+			res.status(400).json(error);
+		}
+	};
+
 	getAllTasks = async (req: Request, res: Response): Promise<void> => {
 		try {
 			const tasks: Task[] = await this.taskService.getAllTasks();
