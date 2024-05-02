@@ -57,6 +57,6 @@
 
 **Documentation**: Continuously update and maintain comprehensive documentation for developers integrating with this API.
 
-### Diagram
+## Diagram
 
 -   [Diagram Flow of Execution](./diagram_problem_6.png)
