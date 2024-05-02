@@ -53,7 +53,7 @@ export class TaskService {
 	): Promise<Task[]> => {
 		return await this.prisma.task.findMany({
 			where: {
-				OR: [
+				AND: [
 					{
 						name: {
 							contains: name,

@@ -22,7 +22,7 @@ export class TaskController {
 				await this.taskService.createTask(data);
 			res.status(201).json(task);
 		} catch (error) {
-			res.status(400).json(error);
+			res.status(500).json(error);
 		}
 	};
 
@@ -46,7 +46,7 @@ export class TaskController {
 				await this.taskService.updateTask(id, data);
 			res.status(200).json(task);
 		} catch (error) {
-			res.status(400).json(error);
+			res.status(500).json(error);
 		}
 	};
 
@@ -63,7 +63,7 @@ export class TaskController {
 			const message: Object = await this.taskService.deleteTask(id);
 			res.status(200).json(message);
 		} catch (error) {
-			res.status(400).json(error);
+			res.status(500).json(error);
 		}
 	};
 
@@ -79,7 +79,7 @@ export class TaskController {
 			}
 			res.status(200).json(existedTask);
 		} catch (error) {
-			res.status(400).json(error);
+			res.status(500).json(error);
 		}
 	};
 
@@ -92,14 +92,14 @@ export class TaskController {
 			);
 			res.status(200).json(tasks);
 		} catch (error) {
-			res.status(400).json(error);
+			res.status(500).json(error);
 		}
 	};
 
 	getAllTasks = async (req: Request, res: Response): Promise<void> => {
 		try {
 			const tasks: Task[] = await this.taskService.getAllTasks();
-			res.json(tasks);
+			res.status(200).json(tasks);
 		} catch (error) {
 			res.status(500).json(error);
 		}
