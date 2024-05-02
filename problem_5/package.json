@@ -12,7 +12,8 @@
 		"start:dev": "nodemon index.ts",
 		"migrate:dev": "npx prisma migrate dev",
 		"prisma:seed": "npx prisma db seed",
-		"prisma:reset": "npx prisma migrate reset",
+		"prisma:reset": "npx prisma migrate reset --force",
+		"prisma:studio": "npx prisma studio",
 		"prisma:generate": "npx prisma generate"
 	},
 	"dependencies": {

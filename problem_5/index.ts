@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', router);
 
-const options = {
+const options: swaggerJSDoc.Options = {
 	definition: {
 		openapi: '3.0.0',
 		info: {
@@ -43,7 +43,7 @@ const options = {
 	apis: ['./src/routes/*.ts'],
 };
 
-const specs = swaggerJSDoc(options);
+const specs: object = swaggerJSDoc(options);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 app.listen(process.env.PORT, () => {
