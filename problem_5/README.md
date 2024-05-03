@@ -15,7 +15,7 @@ Solve the problem 5 via link: https://99tech.notion.site/Problem-5-A-Crude-Serve
 1. Clone the server.
 
 ```bash
-$ git clone https://github.com/DinhQuocDat1310/code_challange_99tech.git
+$ git clone https://github.com/DinhQuocDat1310/DinhQuocDat.git
 ```
 
 2. Move to `problem_5` directory.
